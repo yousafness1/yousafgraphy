@@ -3,65 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photography Portfolio</title>
+    <title>YousafGraphy | Commercial, Portrait & Street Photography</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --accent-color: #66fcf1;
+            --text-main: #ffffff;
+            --text-muted: #c5c6c7;
+            --border-color: #1f242d;
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #111; color: #fff; padding: 40px 20px; text-align: center; }
-        h1 { font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
-        p.subtitle { color: #888; font-size: 1rem; margin-bottom: 40px; }
-        .category-title { text-align: left; max-width: 1100px; margin: 40px auto 15px auto; font-size: 1.4rem; border-bottom: 1px solid #333; padding-bottom: 8px; color: #ddd; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; max-width: 1100px; margin: 0 auto 50px auto; }
-        .grid img { width: 100%; height: 350px; object-fit: cover; border-radius: 4px; transition: transform 0.2s ease, opacity 0.2s ease; background-color: #222; }
-        .grid img:hover { transform: scale(1.02); opacity: 0.9; }
-        footer { margin-top: 60px; color: #666; font-size: 0.9rem; border-top: 1px solid #222; padding-top: 30px; }
-        footer a { color: #aaa; text-decoration: none; }
-        footer a:hover { color: #fff; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 0 20px 60px 20px;
+            overflow-x: hidden;
+        }
+
+        /* Hero Header */
+        header {
+            min-height: 45vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px 40px 20px;
+            background: radial-gradient(circle at top, rgba(102, 252, 241, 0.08), transparent 70%);
+        }
+
+        .brand-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #fff 30%, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
+        }
+
+        /* Filter Controls */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto 40px auto;
+            position: sticky;
+            top: 20px;
+            z-index: 10;
+            background: rgba(11, 12, 16, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 10px 15px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            color: #000;
+            background-color: var(--text-main);
+        }
+
+        /* Portfolio Container & Grid */
+        .portfolio-section {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-title {
+            text-align: left;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 50px 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #161a22;
+            cursor: pointer;
+            aspect-ratio: 4/5;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+        }
+
+        .grid-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .grid-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .grid-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay p {
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        footer {
+            max-width: 1200px;
+            margin: 80px auto 0 auto;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        footer a:hover {
+            opacity: 0.8;
+        }
+
+        /* Lightbox Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            font-weight: 300;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header Section -->
-    <h1>YousafGraphy<h1>
-    <p class="subtitle">Commercial & Lifestyle • Portraits • Street Photography</p>
+    <!-- Hero Header -->
+    <header>
+        <h1 class="brand-title">YousafGraphy</h1>
+        <p class="subtitle">Commercial & Lifestyle • Portraits • Street Photography</p>
+        <a href="#contact" class="cta-btn">Book a Session</a>
+    </header>
 
-
-    <h2 class="category-title">Portraits & People</h2>
-    <div class="grid">
-        <!-- Update image src paths to match your file names -->
-        <img src="commercial/salon1.jpg" alt="Commercial Photo 1">
-        <img src="commercial/salon2.jpg" alt="Commercial Photo 2">
-        <img src="commercial/salon3.jpg" alt="Commercial Photo 3">
+    <!-- Category Filter Bar -->
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterCategory('all')">All Works</button>
+        <button class="filter-btn" onclick="filterCategory('portraits')">Portraits</button>
+        <button class="filter-btn" onclick="filterCategory('weddings')">Weddings</button>
+        <button class="filter-btn" onclick="filterCategory('street')">Street</button>
+        <button class="filter-btn" onclick="filterCategory('products')">Products</button>
     </div>
 
-    <!-- Category 2: Portraits -->
-    <h2 class="category-title">Wedding & Engagements</h2>
-    <div class="grid">
-        <img src="portraits/portrait1.jpg" alt="Portrait Photo 1">
-        <img src="portraits/portrait2.jpg" alt="Portrait Photo 2">
-        <img src="portraits/portrait3.jpg" alt="Portrait Photo 3">
-    </div>
+    <div class="portfolio-section">
 
-    <!-- Category 3: Street Photography -->
-    <h2 class="category-title">Street & Aesthetic</h2>
-    <div class="grid">
-        <img src="street/street1.jpg" alt="Street Photo 1">
-        <img src="street/street2.jpg" alt="Street Photo 2">
-        <img src="street/street3.jpg" alt="Street Photo 3">
-    </div>
+        <!-- Category 1: Portraits & People -->
+        <div class="category-block" data-category="portraits">
+            <h2 class="category-title">Portraits & People</h2>
+            <div class="grid">
+                <div class="grid-item" onclick="openLightbox(this)">
+                    <img src="commercial/salon1.jpg" alt="Salon Lifestyle Portrait 1">
+                    <div class="overlay"><p>Salon Lifestyle Portrait</p></div>
+                </div>
+                <div class="grid-item" onclick="openLightbox(this)">
+                    <img src="commercial/salon2.jpg" alt="Commercial Studio Shot">
+                    <div class="overlay"><p>Commercial Studio Portrait</p></div>
+                </div>
+                <div class="grid-item" onclick="openLightbox(this)">
+                    <img src="commercial/salon3.jpg" alt="Environmental Portrait">
+                    <div class="overlay"><p>Environmental Portrait</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category 2: Wedding & Engagements -->
+        <div class="category-block" data-category="weddings">
+            <h2 class="category-title">Wedding & Engagements</h2>
+            <div class="grid">
+                <div class="grid-item" onclick="openLightbox(this)">
+                    <img src="portraits/portrait1.jpg" alt="Wedding Couple Portrait">
+                    <div class="overlay"><p>Wedding Ceremony</p></div>
+                </div>
+                <div class="grid-item" onclick="openLightbox(this)">
+                    <img src="portraits/portrait2.jpg" alt="Engagement Shoot">
+                    <div class="overlay"><p>Engagement Story</p></div>
+                </div>
+                <div class="grid-item" onclick="openLightbox(this)">
+                    <img src="portraits/portrait3.jpg" alt="Bridal Details">
+                    <div class="overlay"><p>Bridal Preparation</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category 3: Street & Aesthetic -->
+        <div class="category-block" data-category="street">
+            <h2 class="category-title">Street & Aesthetic</h2>
+            <div class="grid">
+                <div class="grid-item" onclick="openLightbox(this)">
+                    <img src="street/street1.jpg" alt="Urban Shadow Play">
+                    <div class="overlay"><p>Urban Geometry</p></div>
+                </div>
+                <div class="grid-item" onclick="openLightbox(this)">
+                    <img src="street/street2.jpg" alt="Night Street Photography">
+                    <div class="overlay"><p>Night Vignette</p></div>
+                </div>
+                <div class="grid-item" onclick="openLightbox(this)">
+                    <img src="street/street3.jpg" alt="Candid City Life">
+                    <div class="overlay"><p>City Movement</p></div>
+                </div>
+            </div>
+        </div>
 
         <!-- Category 4: Product Photography -->
-    <h2 class="category-title">Product Photography</h2>
-    <div class="grid">
-        <img src="street/street1.jpg" alt="Street Photo 1">
-        <img src="street/street2.jpg" alt="Street Photo 2">
-        <img src="street/street3.jpg" alt="Street Photo 3">
+        <div class="category-block" data-category="products">
+            <h2 class="category-title">Product Photography</h2>
+            <div class="grid">
+                <div class="grid-item" onclick="openLightbox(this)">
+                    <img src="street/street1.jpg" alt="Minimal Product Shot">
+                    <div class="overlay"><p>Commercial Branding</p></div>
+                </div>
+                <div class="grid-item" onclick="openLightbox(this)">
+                    <img src="street/street2.jpg" alt="Cosmetic Product Display">
+                    <div class="overlay"><p>Cosmetics Line</p></div>
+                </div>
+                <div class="grid-item" onclick="openLightbox(this)">
+                    <img src="street/street3.jpg" alt="E-Commerce Feature">
+                    <div class="overlay"><p>Studio Product Display</p></div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Contact & Social Footer -->
-    <footer>
-        <p>Inquiries & Bookings: <a href="mailto:your.email@example.com">yousafk444@gmail.com</a></p>
-        <p style="margin-top: 8px;">Instagram: <a href="https://instagram.com/yousafgraphy" target="_blank">@yousafgraphy</a></p>
+    <footer id="contact">
+        <p>Inquiries & Direct Bookings:</p>
+        <p style="margin: 8px 0; font-size: 1.1rem; font-weight: 600;">
+            <a href="mailto:yousafk444@gmail.com">yousafk444@gmail.com</a>
+        </p>
+        <p style="margin-top: 15px;">
+            Instagram: <a href="https://instagram.com/yousafgraphy" target="_blank">@yousafgraphy</a>
+        </p>
     </footer>
+
+    <!-- Fullscreen Lightbox Modal -->
+    <div id="lightbox" class="modal" onclick="closeLightbox()">
+        <span class="modal-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Fullscreen View">
+    </div>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Category Filter Logic
+        function filterCategory(category) {
+            const blocks = document.querySelectorAll('.category-block');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            blocks.forEach(block => {
+                if (category === 'all' || block.getAttribute('data-category') === category) {
+                    block.style.display = 'block';
+                } else {
+                    block.style.display = 'none';
+                }
+            });
+        }
+
+        // Lightbox Functions
+        function openLightbox(element) {
+            const imgSrc = element.querySelector('img').src;
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>
