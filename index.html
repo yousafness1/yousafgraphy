@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Portfolio</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #111; color: #fff; padding: 40px 20px; text-align: center; }
+        h1 { font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
+        p.subtitle { color: #888; font-size: 1rem; margin-bottom: 40px; }
+        .category-title { text-align: left; max-width: 1100px; margin: 40px auto 15px auto; font-size: 1.4rem; border-bottom: 1px solid #333; padding-bottom: 8px; color: #ddd; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; max-width: 1100px; margin: 0 auto 50px auto; }
+        .grid img { width: 100%; height: 350px; object-fit: cover; border-radius: 4px; transition: transform 0.2s ease, opacity 0.2s ease; background-color: #222; }
+        .grid img:hover { transform: scale(1.02); opacity: 0.9; }
+        footer { margin-top: 60px; color: #666; font-size: 0.9rem; border-top: 1px solid #222; padding-top: 30px; }
+        footer a { color: #aaa; text-decoration: none; }
+        footer a:hover { color: #fff; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <h1>Your Name Photography</h1>
+    <p class="subtitle">Commercial & Lifestyle • Portraits • Street Photography</p>
+
+    <!-- Category 1: Commercial / Interior Photography -->
+    <h2 class="category-title">Commercial & Interiors</h2>
+    <div class="grid">
+        <!-- Update image src paths to match your file names -->
+        <img src="commercial/salon1.jpg" alt="Commercial Photo 1">
+        <img src="commercial/salon2.jpg" alt="Commercial Photo 2">
+        <img src="commercial/salon3.jpg" alt="Commercial Photo 3">
+    </div>
+
+    <!-- Category 2: Portraits -->
+    <h2 class="category-title">Portraits & People</h2>
+    <div class="grid">
+        <img src="portraits/portrait1.jpg" alt="Portrait Photo 1">
+        <img src="portraits/portrait2.jpg" alt="Portrait Photo 2">
+        <img src="portraits/portrait3.jpg" alt="Portrait Photo 3">
+    </div>
+
+    <!-- Category 3: Street Photography -->
+    <h2 class="category-title">Street & Aesthetic</h2>
+    <div class="grid">
+        <img src="street/street1.jpg" alt="Street Photo 1">
+        <img src="street/street2.jpg" alt="Street Photo 2">
+        <img src="street/street3.jpg" alt="Street Photo 3">
+    </div>
+
+    <!-- Contact & Social Footer -->
+    <footer>
+        <p>Inquiries & Bookings: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+        <p style="margin-top: 8px;">Instagram: <a href="https://instagram.com/yourhandle" target="_blank">@yourhandle</a></p>
+    </footer>
+
+</body>
+</html>
